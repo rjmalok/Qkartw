@@ -54,37 +54,34 @@ function addAdventureDetailsToDOM(adventure) {
 function addBootstrapPhotoGallery(images) {
   // TODO: MODULE_ADVENTURE_DETAILS
   // 1. Add the bootstrap carousel to show the Adventure images
-  document.getElementById("photo-gallery").innerHTML=`
-  <div id="carouselExampleIndicators" class="carousel slide">
-  <div class="carousel-indicators" id="carousel-indicators"></div>
-  <div class="carousel-inner" id="carousel-inner"></div>
-  <button class="carousel-control-prev" type="button"data-bs-target="#carouselExampleIdicators" data bs-slide="prev">
-  < span class="carousel-control=prev-icon"aria-hidden="true"></span>
-  < span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next"type="button" data-bs-target="#carouselExampleIndicators"data-bs-slide="next">
-  < span class="carousel-control=next-icon"aria-hidden="true"></span>
-  < span class="visually-hidden">Next</span>
-  </button>
-  </div> `
-  images.forEach((image,imageIndex)=> {
-    const carouselItemElem=document.createElement("div");
-    const activeClass= imageIndex===0?"active":"";
-    carouselItemElem.className=`carousel-item ${activeClass}`;
-    carouselItemElem.innerHTML=`<img src=${image} alt="" srcset="" class="activity-card-image pb-3 pb-md-0"/>`;
-    document.getElementById("carousel-inner").append(carouselItemElem)
-    const indicator=`
-    <button
-    type="button"
-    data-bs-target="#carouselExampleIndicators"
-    data-bs-slide-to="${imageIndex}"
-    ${imageIndex=== 0?'class="active"':""}
-    aria-current="true"
-    aria-label="Slide${imageIndex+1}"></button>`
-    document.getElementById("carousel-indicators").innerHTML+= indicator;
-    
-  });
-
+  let photoGallery = document.getElementById("photo-gallery")
+   photoGallery.innerHTML=`
+   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+   <div class="carousel-indicators">
+     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true"></button>
+     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="slide 2"></button>
+     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="slide 3"></button>
+   </div>
+   <div class="carousel-inner"  id="carousel-inner">
+   </div>
+   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+     <span class="visually-hidden">Previous</span>
+   </button>
+   <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+     <span class="carousel-control-next-icon" aria-hidden="true"></span>
+     <span class="visually-hidden">Next</span>
+   </button>
+ </div>
+   `
+   images.map((key,index)=>{
+     let divElement = document.createElement("div");
+     divElement.className=`carousel-item ${index===0?'active':''}`;
+     divElement.innerHTML=`
+       <img src=${key} class="activity-card-image pb-3"/>
+     `;
+     document.getElementById("carousel-inner").appendChild(divElement);
+   });
 }
 
 //Implementation of conditional rendering of DOM based on availability
